@@ -65,11 +65,36 @@ void PrintRow( float mat[N][N], int row, int from, int numel ){
     }
     printf("\n");
 }
+
+void MultEscalar( float vect[N], float vectres[N], float alfa){
+    int pos;
+    for (int i = 0;N;i++){
+        pos = i;
+        vectres[pos] = vect[i] * alfa;
+    }
+}
+
+float Scalar( float vect1[N], float vect2[N] ){
+    float res;
+    for (int i = 0;N;i++){
+        res = res + ( vect1[i] * vect2[i] );
+    }
+    return res; 
+}
+
+float Magnitude( float vect[N] ){
+    return sqrtf(Scalar(vect,vect));
+    }
+    
+
+
 int main(){
         InitData();
-
+        float resultat; 
     // Example usage of PrintVect
     PrintVect(V1, 2, 5);  // Display 5 elements starting from position 2 in V1
         PrintRow(Mat, 6, 1, 7);
+        resultat = Magnitude(V1);
+        printf("%f",res);
     return 0;
 }
