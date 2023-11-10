@@ -67,7 +67,7 @@ void MultEscalar( float vect[N], float vectres[N], float alfa ){
         }
 }
 float Scalar( float vect1[N], float vect2[N] ){
-        float res;
+        float res = 0;
         for (int i = 0;i<N;i++){
                 res = res + (vect1[i] * vect2[i]);
         }
@@ -91,7 +91,7 @@ void Projection( float vect1[N], float vect2[N], float vectres[N] ){
         res1 = Scalar(vect1,vect2);
         res2 = Magnitude(vect2);
         res3 = res1/res2;
-        MultEscalar(vect2, vect1, res3);
+        MultEscalar(vect2, vectres, res3);
 }
 float Infininorm( float M[N][N] ){
         float max_sum = 0;
@@ -178,4 +178,108 @@ int Jacobi( float M[N][N] , float vect[N], float vectres[N], unsigned iter ){
         return 1;
 }
 int main(){
+        InitData();
+
+    // Llama a todas las demás funciones aquí
+    PrintVect(V1, 0, 10);
+    printf("\n");
+    PrintVect(V1,  256, 10);
+    printf("\n");
+    PrintVect(V2, 0, 10);
+    printf("\n");
+    PrintVect(V2, 256, 10);
+    printf("\n");
+    PrintVect(V3, 0, 10);
+    printf("\n");
+    PrintVect(V3, 256, 10);
+    printf("\n");
+    PrintRow(Mat, 0, 0, 10);
+    printf("\n");
+    PrintRow(Mat, 100, 0, 10);
+    printf("\n");
+    PrintRow(MatDD, 0, 0, 10);
+    printf("\n");
+    PrintRow(MatDD, 100, 90, 10);
+    printf("\n");
+
+    float inf, one, frob;
+    inf=Infininorm(Mat);
+    printf("Infininorm de Mat: %f\n", inf);
+    printf("\n");
+    one=Onenorm(Mat);
+    printf("Onenorm de Mat: %f\n", one);
+    printf("\n");
+    frob=NormFrobenius(Mat);
+    printf("Frobenius de Mat: %f\n", frob);
+    printf("\n");
+    int isDiagonalDom = DiagonalDom(Mat);
+    if (isDiagonalDom) {
+        printf("Mat és diagonal dominant.\n");
+        printf("\n");
+    } else {
+        printf("Mat no és diagonal dominant.\n");
+        printf("\n");
+    }
+    inf=Infininorm(MatDD);
+    printf("Infininorm de MatDD: %f\n", inf);
+    printf("\n");
+    one=Onenorm(MatDD);
+    printf("Onenorm de MatDD: %f\n", one);
+    printf("\n");
+    frob=NormFrobenius(MatDD);
+    printf("Frobenius de MatDD %f\n", frob);
+    printf("\n");
+    int isDiagonalDomDD = DiagonalDom(MatDD);
+    if (isDiagonalDomDD) {
+        printf("MatDD és diagonal dominant.\n");
+        printf("\n");
+    } else {
+        printf("MatDD no és diagonal dominant.\n");
+        printf("\n");
+    }
+
+    float result = Scalar(V1, V2);
+    printf("Ecalar V1 V2: %f\n", result);
+    printf("\n");
+    float result1 = Scalar(V1, V3);
+    printf("Escalar V1 V3: %f\n", result1);
+    printf("\n");
+    float result2 = Scalar(V2, V3);
+    printf("Escalar V2 V3: %f\n", result2);
+    printf("\n");
+    result = Magnitude(V1);
+    printf("Magnitud de V1: %f\n", result);
+    printf("\n");
+    result = Magnitude(V2);
+    printf("Magnitud de V2: %f\n", result);
+    printf("\n");
+    result = Magnitude(V3);
+    printf("Magnitud de V3: %f\n", result);
+    printf("\n");
+
+    int isOrthogonal = Ortogonal(V1, V2);
+    if (isOrthogonal) {
+        printf("V1 y V2 són ortogonals.\n");
+        printf("\n");
+    } else {
+        printf("V1 y V2 no són ortogonals.\n");
+        printf("\n");
+    }
+
+    MultEscalar(V3, V3, 2.0);
+    PrintVect(V3, 0, 10);
+    printf("\n");
+    PrintVect(V3, 256, 10);
+    printf("\n");
+
+    Projection(V2, V3, V4);
+    PrintVect(V4, 0 ,10);
+    printf("\n");
+    Projection(V1, V2, V4);
+    PrintVect(V4, 0, 10);
+    printf("\n");
+
+    // Llama a las demás funciones aquí
+
+    return 0;
 }
