@@ -60,10 +60,8 @@ void PrintRow( float mat[N][N], int row, int from, int numel ){
         printf("\n");
 }
 void MultEscalar( float vect[N], float vectres[N], float alfa ){
-        int pos;
         for (int i = 0;i<N;i++){
-                pos = i;
-                vectres[pos] = vect[i] * alfa;
+                vectres[i] = vect[i] * alfa;
         }
 }
 float Scalar( float vect1[N], float vect2[N] ){
@@ -74,7 +72,14 @@ float Scalar( float vect1[N], float vect2[N] ){
         return res;
 }
 float Magnitude( float vect[N] ){
-        return sqrtf(Scalar(vect,vect));
+        float res = 0;
+	for(int i =0; i<N;i++){
+		float suma = 0;
+		suma = pow(vect[i],2);
+		res +=suma;
+	}
+	float magnitude = sqrt(res);
+	return magnitude;
 }
 int Ortogonal( float vect1[N], float vect2[N] ){
         float resp;
@@ -277,6 +282,18 @@ int main(){
     printf("\n");
     Projection(V1, V2, V4);
     PrintVect(V4, 0, 10);
+    printf("\n");
+        // J Jacob
+    Jacobi(MatDD,V3,V4,1);
+    printf("ELs elements 0 a 9 de la solució (1 iter) del sistema d'equacions són: \n");
+    for (int i = 0; i < 10; i++){
+            printf("%f ", V4[i]);
+                }
+    Jacobi(MatDD,V3,V4,1000);
+    printf("ELs elements 0 a 9 de la solució (1000 iter) del sistema d'equacions són: ");
+            for (int i = 0; i < 10; i++){
+            printf("%f ", V4[i]);
+                }
     printf("\n");
 
     // Llama a las demás funciones aquí
