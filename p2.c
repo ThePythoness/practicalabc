@@ -302,7 +302,5 @@ int main(){
                 }
     printf("\n");
 
-    // Llama a las demás funciones aquí
-
     return 0;
 }
